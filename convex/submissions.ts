@@ -22,8 +22,6 @@ export const getStatus = query(async ({ db }, puzzleId: Id<'puzzles'>) => {
     }
   }
 
-  console.log('XXX submittermap', scoreById)
-
   const pointsByName = await Promise.all(
     Array.from(scoreById.entries()).map(async ([submitterId, points]) => {
       const submitter = (await db.get(new Id('users', submitterId)))!
@@ -48,12 +46,16 @@ export const getStatus = query(async ({ db }, puzzleId: Id<'puzzles'>) => {
   }
 })
 
+export function isPangram(word: string) {
+  const numLetters = new Set(word).size
+  return numLetters === 7
+}
+
 function score(word: string) {
   if (word.length === 4) {
     return 1
   }
-  const numLetters = new Set(word).size
-  if (numLetters === 7) {
+  if (isPangram(word)) {
     return word.length + 7
   }
   return word.length

@@ -1,7 +1,7 @@
-import { useAction, useMutation, useQuery } from '../convex/_generated/react'
+import { useMutation, useQuery } from '../convex/_generated/react'
 import { useState, useEffect } from 'react'
 import { Id, Document } from '../convex/_generated/dataModel'
-import { SubmissionResponse } from '../convex/submissions'
+import { isPangram, SubmissionResponse } from '../convex/submissions'
 
 export default function App() {
   const setup = useMutation('puzzles:setup')
@@ -117,7 +117,6 @@ function Answers({ puzzleId }: { puzzleId: Id<'puzzles'> }) {
   }
 
   const { words, pointsByName, totalScore } = submissions
-  console.log('XXX', pointsByName)
   return (
     <div className="answers">
       <div>
@@ -132,7 +131,7 @@ function Answers({ puzzleId }: { puzzleId: Id<'puzzles'> }) {
       ))}
       <br />
       {words.map((word) => (
-        <div key={word}>{word}</div>
+        <div key={word}>{isPangram(word) ? <b>{word}</b> : word}</div>
       ))}
     </div>
   )
