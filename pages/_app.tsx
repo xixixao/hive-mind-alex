@@ -1,14 +1,27 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import { ConvexProvider, ConvexReactClient } from 'convex/react'
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL)
+import { ConvexReactClient } from 'convex/react'
+import { ConvexProviderWithAuth0 } from 'convex/react-auth0'
+import convexConfig from '../convex.json'
 
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!)
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ConvexProvider client={convex}>
-      <Component {...pageProps} />
-    </ConvexProvider>
+    <main>
+      <h1>Hive Mind</h1>
+      <p>
+        Like{' '}
+        <a href="https://www.nytimes.com/puzzles/spelling-bee">spelling bee</a>,
+        but with friends!
+      </p>
+      <ConvexProviderWithAuth0
+        client={convex}
+        authInfo={convexConfig.authInfo[0]}
+      >
+        <Component {...pageProps} />
+      </ConvexProviderWithAuth0>
+    </main>
   )
 }
 
