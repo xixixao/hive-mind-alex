@@ -104,7 +104,7 @@ function Response({
         const _: never = submissionResponse.reason
     }
     return (
-      <div className={'incorrect-response ' + fadeOut}>Inccorect: {text}</div>
+      <div className={'incorrect-response ' + fadeOut}>Incorrect: {text}</div>
     )
   }
 }
