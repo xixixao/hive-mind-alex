@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '../convex/_generated/react'
 import { useState, useEffect } from 'react'
-import { Id, Document } from '../convex/_generated/dataModel'
+import { Id, Doc } from '../convex/_generated/dataModel'
 import { isPangram, SubmissionResponse } from '../convex/submissions'
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
   return <Puzzle puzzle={puzzle} />
 }
 
-function Puzzle({ puzzle }: { puzzle: Document<'puzzles'> }) {
+function Puzzle({ puzzle }: { puzzle: Doc<'puzzles'> }) {
   let otherLetters = puzzle.letters.filter(
     (letter) => letter !== puzzle.centerLetter
   )
