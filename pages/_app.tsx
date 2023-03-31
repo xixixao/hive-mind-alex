@@ -1,11 +1,30 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import { ConvexReactClient } from 'convex/react'
+import { Authenticated, ConvexReactClient, Unauthenticated } from 'convex/react'
 import { ConvexProviderWithAuth0 } from 'convex/react-auth0'
-import convexConfig from '../convex.json'
+import { Auth0Provider, useAuth0 } from '@auth0/auth0-react'
 
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!)
+function LoginButton() {
+  const { loginWithRedirect } = useAuth0()
+  return (
+    <button
+      onClick={() => {
+        loginWithRedirect()
+      }}
+    >
+      Log in
+    </button>
+  )
+}
+
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!, {
+  verbose: true,
+})
+
+const Unauthenticated2 = Unauthenticated as any
+const Authenticated2 = Authenticated as any
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <main>
@@ -15,12 +34,25 @@ function MyApp({ Component, pageProps }: AppProps) {
         <a href="https://www.nytimes.com/puzzles/spelling-bee">spelling bee</a>,
         but with friends!
       </p>
-      <ConvexProviderWithAuth0
-        client={convex}
-        authInfo={convexConfig.authInfo[0]}
+      <Auth0Provider
+        domain="dev-n0ixyn7ordl7a0bi.us.auth0.com"
+        clientId="mJOXmS1kjcMZ0QGyttvkUxEY4lovikRZ"
+        authorizationParams={{
+          redirect_uri:
+            global.window !== undefined
+              ? global.window.location.origin
+              : (null as any),
+        }}
       >
-        <Component {...pageProps} />
-      </ConvexProviderWithAuth0>
+        <ConvexProviderWithAuth0 client={convex}>
+          <Unauthenticated2>
+            <LoginButton />
+          </Unauthenticated2>
+          <Authenticated2>
+            <Component {...pageProps} />
+          </Authenticated2>
+        </ConvexProviderWithAuth0>
+      </Auth0Provider>
     </main>
   )
 }
