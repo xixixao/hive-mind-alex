@@ -8,6 +8,7 @@ export default function App() {
   const puzzle = useQuery('puzzles:get')
 
   useEffect(() => {
+    console.log('Setting up')
     setup()
   }, [setup])
 

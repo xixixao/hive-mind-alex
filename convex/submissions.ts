@@ -84,49 +84,49 @@ export const submit = mutation(
     const { db } = ctx
     const puzzle = (await db.get(puzzleId))!
     const upperWord = word.toUpperCase()
-    if (!upperWord.includes(puzzle.centerLetter)) {
-      return {
-        result: 'incorrect',
-        reason: 'missing-center-letter',
-      }
-    }
+    // if (!upperWord.includes(puzzle.centerLetter)) {
+    //   return {
+    //     result: 'incorrect',
+    //     reason: 'missing-center-letter',
+    //   }
+    // }
 
-    for (const letter of upperWord) {
-      if (!puzzle.letters.includes(letter)) {
-        return {
-          result: 'incorrect',
-          reason: 'invalid-letter',
-        }
-      }
-    }
+    // for (const letter of upperWord) {
+    //   if (!puzzle.letters.includes(letter)) {
+    //     return {
+    //       result: 'incorrect',
+    //       reason: 'invalid-letter',
+    //     }
+    //   }
+    // }
 
-    if (upperWord.length < 4) {
-      return {
-        result: 'incorrect',
-        reason: 'too-short',
-      }
-    }
+    // if (upperWord.length < 4) {
+    //   return {
+    //     result: 'incorrect',
+    //     reason: 'too-short',
+    //   }
+    // }
 
-    if (!puzzle.answers.includes(upperWord)) {
-      return {
-        result: 'incorrect',
-        reason: 'not-a-word',
-      }
-    }
+    // if (!puzzle.answers.includes(upperWord)) {
+    //   return {
+    //     result: 'incorrect',
+    //     reason: 'not-a-word',
+    //   }
+    // }
 
-    let prevSubmission = await db
-      .query('submissions')
-      .withIndex('by_puzzle', (q) =>
-        q.eq('puzzleId', puzzleId).eq('word', upperWord)
-      )
-      .first()
+    // let prevSubmission = await db
+    //   .query('submissions')
+    //   .withIndex('by_puzzle', (q) =>
+    //     q.eq('puzzleId', puzzleId).eq('word', upperWord)
+    //   )
+    //   .first()
 
-    if (prevSubmission !== null) {
-      return {
-        result: 'incorrect',
-        reason: 'already-submitted',
-      }
-    }
+    // if (prevSubmission !== null) {
+    //   return {
+    //     result: 'incorrect',
+    //     reason: 'already-submitted',
+    //   }
+    // }
 
     const user = await getCurrentUser(ctx)
 

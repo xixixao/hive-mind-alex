@@ -1,10 +1,12 @@
 {
-  "project": "hive-mind-65524",
-  "team": "alexcole924",
-  "prodUrl": "https://famous-deer-622.convex.cloud",
+  "project": "hive-mind-4f1ac",
+  "team": "xixixao",
+  "prodUrl": "https://fleet-raccoon-653.convex.cloud",
   "functions": "convex/",
-  "authInfo": [      {
-    "domain": "https://dev-n0ixyn7ordl7a0bi.us.auth0.com/",
-    "applicationID": "mJOXmS1kjcMZ0QGyttvkUxEY4lovikRZ"
-  }]
+  "authInfo": [
+    {
+      "domain": "https://dev-8w162wmqtqxiwfe2.us.auth0.com/",
+      "applicationID": "vyEEzrNW8FZCA7NnVPfVnV192gZcXpt8"
+    }
+  ]
 }

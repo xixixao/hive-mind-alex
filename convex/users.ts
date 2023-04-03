@@ -3,6 +3,7 @@ import { MutationCtx, QueryCtx } from './_generated/server'
 export async function maybeCreateCurrentUser(ctx: MutationCtx) {
   const { db, auth } = ctx
   const identity = await auth.getUserIdentity()
+  console.log(identity)
   if (!identity) {
     throw new Error(
       'Called maybeCreateCurrentUser without authentication present'
