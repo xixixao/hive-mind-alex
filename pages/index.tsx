@@ -24,7 +24,7 @@ function Puzzle({ puzzle }: { puzzle: Doc<'puzzles'> }) {
   )
   return (
     <div>
-      The puzzle: <b>{puzzle.centerLetter}</b> {otherLetters.join(' ')}
+      The puzzle is WOW: <b>{puzzle.centerLetter}</b> {otherLetters.join(' ')}
       <SubmissionManager puzzleId={puzzle._id} />
       <Answers puzzleId={puzzle._id} />
     </div>
